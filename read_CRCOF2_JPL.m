@@ -90,5 +90,5 @@ end
 L=1./(2*(1:Lmax+1)+1);
 G=sum(DeltaRC.*DeltaRC+DeltaRS.*DeltaRS,2);
 for i=1:k
-sgm(i,:)=sqrt(L.*G(:,1,i)');
+    sgm(i,:)=sqrt(L.*G(:,1,i)');
 end
