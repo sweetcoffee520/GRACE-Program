@@ -8,12 +8,12 @@ for i=1:n_c
         cetax(j+(i-1)*n_f,1)=ceta(i);
         nceta(j+(i-1)*n_f,1)=i;
     end
-end
+end 
 
-a=ceta; %%纬度矩阵
-b=fir;  %%经度矩阵
-c=n_c;  %%纬度矩阵长度
-d=n_f;  %%经度矩阵长度
+a=ceta;
+b=fir;
+c=n_c;
+d=n_f;
 e=cetax;
 f=firx;
 g=nceta;
