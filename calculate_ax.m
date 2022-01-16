@@ -83,12 +83,12 @@ vary_ax4=zeros(xx*yy,3,k,'double');
 vary_axx3=zeros(xx*yy,k,'double');
 vary_axx4=zeros(xx*yy,3,k,'double');
 for r=1:k
-%     vary_ax2=sumg_grace(:,:,r);
+    %     vary_ax2=sumg_grace(:,:,r);
     vary_ax2=vary_ax(:,:,r);
     vary_ax1=vary_ax2';
     vary_ax3(:,r)=reshape(vary_ax1,xx*yy,1);
     vary_ax4(:,:,r)=[lonx,latx,vary_ax3(:,r)];
-%     vary_axx2=sumg_gracex(:,:,r);
+    %     vary_axx2=sumg_gracex(:,:,r);
     vary_axx2=vary_axx(:,:,r);
     vary_axx1=vary_axx2';
     vary_axx3(:,r)=reshape(vary_axx1,xx*yy,1);
@@ -105,6 +105,6 @@ latxx=cosd(lat);
 latx=reshape(latxx,1,xx*yy);
 
 for i=1:k
-ave_vary_ax(i)=latx*reshape(sumg_grace(:,:,i)',xx*yy,1)./sum(latx(:));
-ave_vary_axx(i)=latx*reshape(sumg_gracex(:,:,i)',xx*yy,1)./sum(latx(:));
+    ave_vary_ax(i)=latx*reshape(sumg_grace(:,:,i)',xx*yy,1)./sum(latx(:));
+    ave_vary_axx(i)=latx*reshape(sumg_gracex(:,:,i)',xx*yy,1)./sum(latx(:));
 end

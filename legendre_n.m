@@ -11,7 +11,7 @@ rP(1:Nmax+1, 1:Nmax+1) will return
 # Recurrence formula:
 P(n,m) = A*p(n-1,m) + B*p(n-2,m)
 %}
-x = cosd(90+88);
+x = cosd(179.5);
 Nmax=60;
 rP(1:Nmax+1,1:Nmax+1)=0;
 

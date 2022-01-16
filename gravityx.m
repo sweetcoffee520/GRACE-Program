@@ -1,7 +1,9 @@
 % function [vary_f,vary_s,vary_fa,vary_sa,vary_fas,vary_chazhix]=gravityx(x,y,DeltaGC,DeltaGS,Lmax,Nlmx,k,loveN_k1)
 Lmax=60;
 [x,y,c,d,e,f,g,h]=region_grid(-90,90,-180,180,1);
-[DeltaGC,DeltaGS,k]=read_CRCOF2_CSR('I:\86442\Level-2\GRACE-FO\Level-2\CSR\RL06\',60);
+% [DeltaGC,DeltaGS,k]=read_CRCOF2_CSR('I:\86442\Level-2\GRACE-FO\Level-2\CSR\RL06\',60);
+[DeltaGC,DeltaGS]=calculate_CS(60,1,grid,1);
+k=1;
 Nlmx = Nlmx_v3(60,x);
 Filename='D:\code\GRACE_py\data\loadLove.txt';
 loveN_k1=-textread(Filename,'%n');
@@ -27,7 +29,7 @@ b2=log(2)/(1-cos(r2/a));
 w2(1)=1;
 w2(2)=(1+exp(-2*b2))/(1-exp(-2*b2))-1/b2;
 for l=1:(Lmax-1)
-w2(l+2)=-(2*l+1)/b2*w2(l+1)+w2(l);
+    w2(l+2)=-(2*l+1)/b2*w2(l+1)+w2(l);
 end
 
 w3=zeros(1,Lmax+1);
@@ -47,7 +49,7 @@ b2=log(2)/(1-cos(r2/a));
 w4(1)=1;
 w4(2)=(1+exp(-2*b2))/(1-exp(-2*b2))-1/b2;
 for l=1:(Lmax-1)
-w4(l+2)=-(2*l+1)/b2*w4(l+1)+w4(l);
+    w4(l+2)=-(2*l+1)/b2*w4(l+1)+w4(l);
 end
 
 loveN_k=loveN_k1(1:Lmax+1,1)';
@@ -86,19 +88,18 @@ for i=1:k
 end
 
 % ¸ßË¹ÂË²¨300km
-for i=1:k
-    for nn=1:xx
-%         for j=1:yy
-            sumg_gracex(nn,:,i)=2*a/3*pave*loveN.*w1*(Nlmx(:,:,nn).*DeltaGC(:,:,i)*cosdmf+Nlmx(:,:,nn).*DeltaGS(:,:,i)*sindmf)/10;
-    end
-end
-
-% FaÂË²¨300km
 % for i=1:k
 %     for nn=1:xx
-%         for j=1:yy
-%             sumg_gracey(nn,j,i)=a*pave/3*w2.*loveN*(Nlmx(:,:,nn).*DeltaGC(:,:,i)*(cosdmf(:,j).*w2')+Nlmx(:,:,nn).*DeltaGS(:,:,i)*(sindmf(:,j).*w2'))/10;
-%         end
+% %         for j=1:yy
+%             sumg_gracex(nn,:,i)=2*a/3*pave*loveN.*w1*(Nlmx(:,:,nn).*DeltaGC(:,:,i)*cosdmf+Nlmx(:,:,nn).*DeltaGS(:,:,i)*sindmf)/10;
+%     end
+% end
+% 
+% % FaÂË²¨300km
+% for i=1:k
+%     for nn=1:xx
+% %         for j=1:yy
+%             sumg_gracey(nn,:,i)=a*pave/3*w2.*loveN*(Nlmx(:,:,nn).*DeltaGC(:,:,i)*(cosdmf.*repmat(w2',[1,yy]))+Nlmx(:,:,nn).*DeltaGS(:,:,i)*(sindmf.*repmat(w2',[1,yy])))/10;
 %     end
 % end
 % %¸ßË¹ÂË²¨400km
